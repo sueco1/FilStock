@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filament Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Filament</h1>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab is-active" role="tab" id="tab-btn-inventory" aria-selected="true" aria-controls="tab-inventory" data-tab="inventory">Inventory</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tab-panel is-active" id="tab-inventory" role="tabpanel" aria-labelledby="tab-btn-inventory">
+
+      <form id="add-form" class="add-form" autocomplete="off">
+        <div class="field field-colour">
+          <label for="add-colour">Colour</label>
+          <div class="colour-input">
+            <input type="color" id="add-hex" value="#2f9e44" aria-label="Pick colour shade">
+            <input type="text" id="add-colour" placeholder="e.g. Green" required maxlength="40">
+          </div>
+        </div>
+        <div class="field">
+          <label for="add-material">Material</label>
+          <input type="text" id="add-material" list="material-options" value="PLA" required maxlength="20">
+          <datalist id="material-options">
+            <option value="PLA"></option>
+            <option value="PLA+"></option>
+            <option value="PETG"></option>
+            <option value="ABS"></option>
+            <option value="ASA"></option>
+            <option value="TPU"></option>
+            <option value="Nylon"></option>
+            <option value="PC"></option>
+          </datalist>
+        </div>
+        <div class="field field-qty">
+          <label for="add-qty">Rolls</label>
+          <input type="number" id="add-qty" min="1" max="50" step="1" value="1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add sealed roll</button>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <div class="toolbar">
+        <p id="summary" class="summary"></p>
+        <div class="filters">
+          <input type="search" id="search" placeholder="Search colour or material" aria-label="Search inventory">
+          <select id="material-filter" aria-label="Filter by material">
+            <option value="">All materials</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="inventory-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
