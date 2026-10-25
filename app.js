@@ -632,6 +632,38 @@
     }
   });
 
+  /* ---------- Number steppers ---------- */
+
+  function enhanceNumberInputs(root) {
+    root.querySelectorAll('input[type="number"]').forEach(input => {
+      if (input.parentElement.classList.contains('stepper')) return;
+      const wrap = document.createElement('span');
+      wrap.className = 'stepper';
+      input.parentNode.insertBefore(wrap, input);
+      wrap.appendChild(input);
+      wrap.insertAdjacentHTML('afterbegin',
+        '<button type="button" class="step-btn" data-step="-1" tabindex="-1" aria-label="Decrease">−</button>');
+      wrap.insertAdjacentHTML('beforeend',
+        '<button type="button" class="step-btn" data-step="1" tabindex="-1" aria-label="Increase">+</button>');
+    });
+  }
+
+  document.addEventListener('click', event => {
+    const btn = event.target.closest('.step-btn');
+    if (!btn) return;
+    const input = btn.parentElement.querySelector('input');
+    if (!input || input.disabled) return;
+    if (btn.dataset.step === '1') input.stepUp(); else input.stepDown();
+    // Fire the same events typing would, so existing handlers react.
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  // Roll cards are re-rendered often; wrap their number inputs as they appear.
+  new MutationObserver(() => enhanceNumberInputs(els.list))
+    .observe(els.list, { childList: true, subtree: true });
+  enhanceNumberInputs(document);
+
   /* ---------- Init ---------- */
 
   load();
