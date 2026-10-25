@@ -1,44 +1,30 @@
 :root {
-  --bg: #e8ebe6;
-  --surface: #f7f8f5;
-  --ink: #1f272b;
-  --muted: #5d686d;
-  --line: #c9cfca;
-  --accent: #1f5eff;
-  --accent-ink: #ffffff;
-  --danger: #b5302a;
-  --track: #d5dad6;
-  --warn-bg: #fbe7b8;
-  --warn-ink: #5a3a00;
-  --warn: #8a4f00;
-  --warn-bg: #fff0d1;
-  --radius: 10px;
-  --font: "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161b1e;
-    --surface: #20272b;
-    --ink: #e6eaea;
-    --muted: #98a3a8;
-    --line: #333d42;
-    --accent: #7aa0ff;
-    --accent-ink: #0d1530;
-    --danger: #ff8a82;
-    --track: #313a3f;
-    --warn-bg: #3b2f12;
-    --warn-ink: #ffd98a;
-    --warn: #ffc46b;
-    --warn-bg: #3a2d12;
-  }
+  color-scheme: dark;
+  --bg: #1f1c30;
+  --surface: #2a2742;
+  --ink: #ece8f7;
+  --muted: #aaa4c6;
+  --line: #3e3a62;
+  --accent: #b8a9ff;
+  --accent-ink: #1f1a3d;
+  --danger: #ff9db0;
+  --track: #3b3759;
+  --warn: #ffcfa3;
+  --warn-ink: #ffdcbc;
+  --warn-bg: #4b3a44;
+  --radius: 16px;
+  --font: ui-rounded, "SF Pro Rounded", "Nunito", "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(1100px 560px at 8% -10%, #38336a 0%, transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, #43304f 0%, transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font);
   font-size: 16px;
@@ -325,6 +311,44 @@ input[type="color"] {
 .print-main .meta { margin: 0; }
 .print-grams { font-weight: 700; }
 
+/* Comfy touches */
+
+.add-form,
+.roll,
+.print-item,
+.empty-state {
+  box-shadow: 0 8px 22px rgba(12, 9, 30, 0.28);
+}
+.empty-state { box-shadow: none; }
+
+input[type="text"],
+input[type="number"],
+input[type="search"],
+select,
+.btn,
+.stepper {
+  border-radius: 10px;
+}
+
+.app-header { border-bottom-color: transparent; }
+.tab { border-radius: 10px 10px 0 0; }
+
+.material {
+  background: rgba(184, 169, 255, 0.14);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.low-stock { border-bottom: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .roll { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .roll:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(12, 9, 30, 0.36);
+  }
+}
+
 /* Number steppers (replace the native spinner arrows) */
 
 input[type="number"] {
@@ -343,7 +367,7 @@ input[type="number"]::-webkit-outer-spin-button {
   align-self: flex-start;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 10px;
   overflow: hidden;
 }
 .stepper:focus-within {
