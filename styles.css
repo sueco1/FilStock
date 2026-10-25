@@ -156,10 +156,14 @@ input[type="color"] {
   height: 2.5rem;
   padding: 2px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 10px;
   background: var(--surface);
   cursor: pointer;
 }
+/* The coloured square is a separate inner element, so it needs its own rounding. */
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { border: 0; border-radius: 7px; }
+input[type="color"]::-moz-color-swatch { border: 0; border-radius: 7px; }
 
 .status {
   min-height: 1.4rem;
